@@ -1,0 +1,38 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.GenByMatDoc">
+    <Page showHeader="true" title="MATERIAL DOCUMENT" showFooter="true" showNavButton="true" navButtonPress="">
+        <content>
+            <List mode="SingleSelectMaster" width="100%" headerText="" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" itemPress="_onListItemPress" items="{/MaterialDocumentHeaderSet}">
+                <infoToolbar>
+                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                        <content>
+                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+                        </content>
+                    </Toolbar>
+                </infoToolbar>
+                <headerToolbar/>
+                <items>
+                    <ObjectListItem intro="" title="{MaterialDocumentNo}" number="" numberUnit="" numberState="None" type="Active" selected="true" showMarkers="false">
+                        <attributes>
+                            <ObjectAttribute title="Sloc" text="{MaterialDocumentYear}" active="false"/>
+                            <ObjectAttribute title="Post Date." text="{PostingDate}" active="false"/>
+                        </attributes>
+                        <firstStatus/>
+                        <secondStatus/>
+                    </ObjectListItem>
+                </items>
+            </List>
+        </content>
+        <footer>
+            <Bar design="Auto">
+                <contentLeft>
+                    <Button text="" type="Default" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+                </contentLeft>
+                <contentMiddle/>
+                <contentRight/>
+            </Bar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+</mvc:View>

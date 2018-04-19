@@ -1,0 +1,50 @@
+{
+  "dataBinding": {
+    "/webapp/view/Dialog3.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/Dialog2.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/Dialog1.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/LandingPage.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/GenByMatDoc.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/ListMatForGen.view.xml": {
+      "entitySet": ""
+    },
+    "/webapp/view/GenByMatNo.view.xml": {
+      "entitySet": ""
+    }
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "",
+    "defaultLanguage": "",
+    "defaultI18NPropertyFile": "",
+    "resourceModelName": ""
+  },
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZSWHB1WM014_SRV/",
+    "metadataFilePath": "localService/ZSWHB1WM014_SRV/metadata.xml",
+    "mockRequestsFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false
+  },
+  "generation": [
+    {
+      "templateId": "servicecatalog.connectivityComponent",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Thu, 19 Apr 2018 09:26:48 GMT"
+    }
+  ],
+  "deploy": {
+    "destination": "S4H",
+    "name": "ZDBIB1WM014"
+  }
+}
