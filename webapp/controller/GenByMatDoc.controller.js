@@ -41,7 +41,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			var sPath = (oBindingContext) ? oBindingContext.getPath() : null;
 			var oModel = (oBindingContext) ? oBindingContext.getModel() : null;
-
+			debugger;
 			var sEntityNameSet;
 			if (sPath !== null && sPath !== "") {
 				if (sPath.substring(0, 1) === "/") {
@@ -96,7 +96,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var oBindingContext = oEvent.getParameter("listItem").getBindingContext();
 
 			return new Promise(function(fnResolve) {
-				this.doNavigate("ListMatForGen", oBindingContext, fnResolve, "");
+				this.doNavigate("ListMatForGen", oBindingContext, fnResolve, "MaterialDocumentNavigation");
 			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
@@ -110,7 +110,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			return new Promise(function(fnResolve) {
 
-				this.doNavigate("ListMatForGen", oBindingContext, fnResolve, "");
+				this.doNavigate("ListMatForGen", oBindingContext, fnResolve, "MaterialDocumentNavigation");
 			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
@@ -124,7 +124,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			return new Promise(function(fnResolve) {
 
-				this.doNavigate("LandingPage", oBindingContext, fnResolve, "");
+				this.doNavigate("LandingPage", oBindingContext, fnResolve, "MaterialDocumentNavigation");
 			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
