@@ -1,9 +1,7 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.LandingPage" xmlns="sap.m">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.LandingPage">
     <Page showHeader="true" title="Generate QR/Barcode" showFooter="false" showNavButton="false">
-        <content>
-            <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="100%" justifyContent="SpaceAround" renderType="Div" visible="true" displayInline="false">
-                <items>
-                    <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="SpaceAround" renderType="Div" visible="true" displayInline="false">
+        <content><VBox alignItems="Stretch" direction="Column" fitContainer="true" width="auto" height="100%" justifyContent="SpaceAround" renderType="Div" visible="true" displayInline="false">
+                <items><HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="SpaceAround" renderType="Div" visible="true" displayInline="false">
                         <items>
                             <GenericTile header="By Material Document" subheader="" frameType="OneByOne" press="_onGenericTilePress">
                                 <tileContent/>
