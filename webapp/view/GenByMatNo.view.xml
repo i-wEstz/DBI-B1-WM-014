@@ -1,5 +1,5 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.GenByMatNo">
-    <Page showHeader="true" title="Generate By Material Number" showFooter="true" navButtonPress="_onPageNavButtonPress">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.GenByMatNo" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+    <Page showHeader="true" title="Generate by Material" showFooter="true" showNavButton="false" navButtonPress="_onPageNavButtonPress">
         <content>
             <form:Form width="100%" editable="true" visible="true">
                 <form:title/>
@@ -11,8 +11,7 @@
                                     <Label text="Material No" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
                                 </form:label>
                                 <form:fields>
-                                    <Input type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
-                                    <Button text="" type="Default" icon="sap-icon://bar-code" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                    <Input placeholder="input material number" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0" valueHelpRequest="_onInputValueHelpRequest"/>
                                 </form:fields>
                             </form:FormElement>
                         </form:formElements>
@@ -23,6 +22,20 @@
                     <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
                 </form:layout>
             </form:Form>
+            <ObjectHeader intro="Material No." title="Material Desc" icon="sap-icon://product" number="" numberUnit="" numberState="None" showMarkers="false" markFavorite="false" markFlagged="false" backgroundDesign="Transparent" condensed="false">
+                <attributes/>
+                <statuses/>
+            </ObjectHeader>
+            <VBox alignItems="Center" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">
+                <items>
+                    <Text text="Print Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+                    <StepInput value="0" min="0" max="10" step="1" largerStep="2" displayValuePrecision="0" width="auto" valueState="None" editable="true" enabled="true"/>
+                </items>
+                <layoutData/>
+            </VBox>
+            <layout:VerticalLayout width="100%" visible="true">
+                <layout:content/>
+            </layout:VerticalLayout>
         </content>
         <footer>
             <Bar design="Auto">

@@ -47,59 +47,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			return oQuery;
 
 		},
-		_onInputValueHelpRequest: function(oEvent) {
-
-			var sDialogName = "Dialog5";
-			this.mDialogs = this.mDialogs || {};
-			var oDialog = this.mDialogs[sDialogName];
-			var oSource = oEvent.getSource();
-			var oBindingContext = oSource.getBindingContext();
-			var sPath = (oBindingContext) ? oBindingContext.getPath() : null;
-			var oView;
-			if (!oDialog) {
-				this.getOwnerComponent().runAsOwner(function() {
-					oView = sap.ui.xmlview({
-						viewName: "com.sap.build.standard.dbiB1Wm014GenQrBarcode.view." + sDialogName
-					});
-					this.getView().addDependent(oView);
-					oView.getController().setRouter(this.oRouter);
-					oDialog = oView.getContent()[0];
-					this.mDialogs[sDialogName] = oDialog;
-				}.bind(this));
-			}
-
-			return new Promise(function(fnResolve) {
-				oDialog.attachEventOnce("afterOpen", null, fnResolve);
-				oDialog.open();
-				if (oView) {
-					oDialog.attachAfterOpen(function() {
-						oDialog.rerender();
-					});
-				} else {
-					oView = oDialog.getParent();
-				}
-
-				var oModel = this.getView().getModel();
-				if (oModel) {
-					oView.setModel(oModel);
-				}
-				if (sPath) {
-					var oParams = oView.getController().getBindingParameters();
-					oView.bindObject({
-						path: sPath,
-						parameters: oParams
-					});
-				}
-			}.bind(this)).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err.message);
-				}
-			});
-
-		},
 		_onButtonPress: function(oEvent) {
 
-			var sDialogName = "Dialog4";
+			var sDialogName = "Dialog2";
 			this.mDialogs = this.mDialogs || {};
 			var oDialog = this.mDialogs[sDialogName];
 			var oSource = oEvent.getSource();

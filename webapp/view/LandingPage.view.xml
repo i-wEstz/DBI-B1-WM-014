@@ -1,13 +1,31 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.LandingPage">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.LandingPage"
+xmlns:html="http://www.w3.org/1999/xhtml">
+		<html:style>
+		.sapMTextLineClamp.sapMTextMaxLine{
+		font-size:1rem; 
+		}
+	</html:style>
     <Page showHeader="true" title="Generate QR/Barcode" showFooter="false" showNavButton="false">
-        <content><VBox alignItems="Stretch" direction="Column" fitContainer="true" width="auto" height="100%" justifyContent="SpaceAround" renderType="Div" visible="true" displayInline="false">
-                <items><HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="SpaceAround" renderType="Div" visible="true" displayInline="false">
+        <content>
+            <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="100%" justifyContent="SpaceAround" renderType="Div" visible="true" displayInline="false">
+                <items>
+                    <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="SpaceAround" renderType="Div" visible="true" displayInline="false">
                         <items>
-                            <GenericTile header="By Material Document" subheader="" frameType="OneByOne" press="_onGenericTilePress">
-                                <tileContent/>
+                            <GenericTile header="Generate by Material Document" subheader="" frameType="OneByOne" press="_onGenericTilePress">
+                                <tileContent>
+                                    <TileContent footer="Number of Documents" unit="">
+                                        <content>
+                                            <NumericContent value="{MaterialDocumentHeaderSet/$count}" valueColor="Neutral" indicator="None" icon="sap-icon://product"/>
+                                        </content>
+                                    </TileContent>
+                                </tileContent>
                             </GenericTile>
-                            <GenericTile header="By Material Number" subheader="" frameType="OneByOne" press="_onGenericTilePress1">
-                                <tileContent/>
+                            <GenericTile header="Generate by Material Number" subheader="" frameType="OneByOne" press="_onGenericTilePress1">
+                                <tileContent>
+                                    <TileContent footer="" unit="">
+                                        <content/>
+                                    </TileContent>
+                                </tileContent>
                             </GenericTile>
                         </items>
                         <layoutData/>
