@@ -8,7 +8,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	return BaseController.extend("com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.GenByMatDoc", {
 		handleRouteMatched: function(oEvent) {
 
-			var oParams = {};
+			var oParams = {
+				expand: "MaterialDocumentNavigation"
+			};
 
 			if (oEvent.mParameters.data.context) {
 				this.sContext = oEvent.mParameters.data.context;
@@ -19,7 +21,29 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						parameters: oParams
 					};
 					this.getView().bindObject(oPath);
+					//Get SLOC and Plant
+					// var oModel = new sap.ui.model.odata.ODataModel(oPath);
+					// var oBaseModel = new sap.ui.model.json.JSONModel();
+					// oModel.read("/MaterialDocumentNavigation", null, null, false, function(oData) {
+					// 	oBaseModel.setData(oData.results);
+					// });
+					// var oBaseData = oBaseModel.getData(); 
 				}
+
+			} else {
+				// var oModel = this.getOwnerComponent().getModel();
+				// var nPath = oModel.sServiceUrl + "/MaterialDocumentHeaderSet/?$expand=MaterialDocumentNavigation"; 
+				// // oPath = {
+				// // 	path: sPath,
+				// // 	parameters: oParams
+				// // };
+				// // this.getView().bindObject(oPath);
+				// var sModel = new sap.ui.model.odata.ODataModel(nPath);
+				// var oBaseModel = new sap.ui.model.json.JSONModel();
+				// sModel.read("/", null, null, false, function(oData) {
+				// 	oBaseModel.setData(oData.results);
+				// });
+				// this.getView().setModel(oBaseModel.oData,"oItems");
 			}
 
 		},
@@ -41,7 +65,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			var sPath = (oBindingContext) ? oBindingContext.getPath() : null;
 			var oModel = (oBindingContext) ? oBindingContext.getModel() : null;
-			debugger;
 			var sEntityNameSet;
 			if (sPath !== null && sPath !== "") {
 				if (sPath.substring(0, 1) === "/") {
@@ -53,7 +76,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var sMasterContext = this.sMasterContext ? this.sMasterContext : sPath;
 
 			if (sEntityNameSet !== null) {
-				sNavigationPropertyName = sViaRelation || this.getOwnerComponent().getNavigationPropertyForNavigationWithContext(sEntityNameSet, sRouteName);
+				sNavigationPropertyName = sViaRelation || this.getOwnerComponent().getNavigationPropertyForNavigationWithContext(sEntityNameSet,
+					sRouteName);
 			}
 			if (sNavigationPropertyName !== null && sNavigationPropertyName !== undefined) {
 				if (sNavigationPropertyName === "") {
@@ -84,7 +108,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					}.bind(this));
 				}
 			} else {
-				this.oRouter.navTo(sRouteName);
+				this.oRouter.navTo(sRouteName, {
+					context: sPath
+				});
 			}
 
 			if (typeof fnPromiseResolve === "function") {
@@ -94,9 +120,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		_onListItemPress: function(oEvent) {
 
 			var oBindingContext = oEvent.getParameter("listItem").getBindingContext();
-
 			return new Promise(function(fnResolve) {
-				this.doNavigate("ListMatForGen", oBindingContext, fnResolve, "MaterialDocumentNavigation");
+				this.doNavigate("ListMatForGen", oBindingContext, fnResolve, "");
 			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
@@ -107,10 +132,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		_onObjectListItemPress: function(oEvent) {
 
 			var oBindingContext = oEvent.getSource().getBindingContext();
-
 			return new Promise(function(fnResolve) {
 
-				this.doNavigate("ListMatForGen", oBindingContext, fnResolve, "MaterialDocumentNavigation");
+				this.doNavigate("ListMatForGen", oBindingContext, fnResolve, "");
 			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
@@ -124,7 +148,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			return new Promise(function(fnResolve) {
 
-				this.doNavigate("LandingPage", oBindingContext, fnResolve, "MaterialDocumentNavigation");
+				this.doNavigate("LandingPage", oBindingContext, fnResolve, "");
 			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
@@ -137,6 +161,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var sDialogName = "Dialog3";
 			this.mDialogs = this.mDialogs || {};
 			var oDialog = this.mDialogs[sDialogName];
+
 			var oSource = oEvent.getSource();
 			var oBindingContext = oSource.getBindingContext();
 			var sPath = (oBindingContext) ? oBindingContext.getPath() : null;
@@ -150,6 +175,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					oView.getController().setRouter(this.oRouter);
 					oDialog = oView.getContent()[0];
 					this.mDialogs[sDialogName] = oDialog;
+					oDialog.getParent().getController().addCallBack(function(fnCallBack) {
+						var oFilters = fnCallBack;
+						var a = this.getView().byId("list");
+						a.getBinding("items").filter(oFilters,sap.ui.model.FilterType.Application);
+					}.bind(this));
+					
+					
 				}.bind(this));
 			}
 

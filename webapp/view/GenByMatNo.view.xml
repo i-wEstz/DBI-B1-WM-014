@@ -1,5 +1,5 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.GenByMatNo" xmlns="sap.m" xmlns:form="sap.ui.layout.form">
-    <Page showHeader="true" title="Generate By Material Number" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.GenByMatNo">
+    <Page showHeader="true" title="Generate By Material Number" showFooter="true" navButtonPress="_onPageNavButtonPress">
         <content>
             <form:Form width="100%" editable="true" visible="true">
                 <form:title/>

@@ -6,6 +6,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"use strict";
 
 	return BaseController.extend("com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.Dialog1", {
+		
+		fnCallBack : null,
+		
+		addCallBack : function(fn){
+			this.fnCallBack = fn;
+		},
 		setRouter: function(oRouter) {
 			this.oRouter = oRouter;
 
@@ -15,12 +21,16 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		_onButtonPress: function(oEvent) {
-
+			var oDialog = this.getView().getContent()[0];
 			var oBindingContext = oEvent.getSource().getBindingContext();
 
 			return new Promise(function(fnResolve) {
-
-				this.doNavigate("LandingPage", oBindingContext, fnResolve, "");
+				
+				// this.doNavigate("GenByMatDoc", oBindingContext, fnResolve, "");
+				oDialog.attachEventOnce("afterClose", null, fnResolve);
+				oDialog.close();
+				this.fnCallBack("OK");
+				this.doNavigate("GenByMatDoc", oBindingContext, fnResolve, "");
 			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
@@ -88,7 +98,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			return new Promise(function(fnResolve) {
 				oDialog.attachEventOnce("afterClose", null, fnResolve);
 				oDialog.close();
-			});
+				this.addCallBack("Cancel");
+			}.bind(this));
 
 		},
 		onInit: function() {
