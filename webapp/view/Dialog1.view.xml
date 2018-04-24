@@ -1,5 +1,5 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.Dialog1" xmlns="sap.m">
-    <Dialog horizontalScrolling="false" showHeader="true" state="None" stretch="false" title="Print Confirmation" type="Standard" verticalScrolling="false">
+    <Dialog horizontalScrolling="false" icon="sap-icon://print" showHeader="true" state="Success" stretch="false" title="Print Confirmation" type="Standard" verticalScrolling="false">
         <content>
             <Text text="Are you confirm print operation ?" width="auto" maxLines="1" wrapping="false" textAlign="center" textDirection="Inherit"/>
         </content>

@@ -130,7 +130,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 							for (var i = 0; i < oTable.getItems().length; i++) {
 								var item = oTable.getItems()[i];
 								var matID = item.getCells()[0].getTitle();
-								var printQty = item.getCells()[2].getValue();
+								var printQty = item.getCells()[1].getValue();
 								var batch = item.getCells()[3].getText();
 								printData.push({
 									label: matID + batch,

@@ -17,21 +17,21 @@
                         </header>
                         <footer/>
                     </Column>
-                    <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                    <Column width="auto" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                        <header>
+                            <Text text="Print Qty." width="57.3125px" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+                        </header>
+                        <footer/>
+                    </Column>
+                    <Column width="50px" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                         <header>
                             <Text text="Qty." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
                         </header>
                         <footer/>
                     </Column>
-                    <Column width="7em" hAlign="Left" vAlign="Middle" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                    <Column width="auto" hAlign="Left" vAlign="Middle" visible="{= ${BatchNumber} === true}" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                         <header>
-                            <Text text="Print Qty." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-                        </header>
-                        <footer/>
-                    </Column>
-                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                        <header>
-                            <Text text="Batch Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+                            <Text text="Batch Number" visible="{= ${BatchNumber} === true}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
                         </header>
                         <footer/>
                     </Column>
@@ -40,12 +40,11 @@
                     <ColumnListItem type="Active">
                         <cells>
                             <ObjectIdentifier title="{MaterialNumber}" text="{MaterialName}" titleActive="false" visible="true"/>
-                            <Text text="{ path: 'QuantityBaseUnit', type: 'sap.ui.model.type.Integer'}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-                            <Input id="print-num" value="{ path: 'QuantityBaseUnit', type: 'sap.ui.model.type.Integer'}" type="Number" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
-                            <Label text="{BatchNumber}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+                            <StepInput value="{ path: 'QuantityBaseUnit', type: 'sap.ui.model.type.Integer'}" min="0" max="9999" step="1" largerStep="2" displayValuePrecision="0" width="auto" valueState="None" editable="true" enabled="true"/>
+                            <ObjectNumber number="{ path: 'QuantityBaseUnit', type: 'sap.ui.model.type.Integer'}" unit="{BaseUnit}" emphasized="true" state="None"/>
+                            <Label text="{BatchNumber}" design="Standard" visible="{= ${BatchNumber} === true}" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
                         </cells>
                     </ColumnListItem>
-     
                 </items>
             </Table>
         </content>

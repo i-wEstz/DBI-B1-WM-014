@@ -1,8 +1,11 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.GenByMatDoc"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<html:style>
-		.sapMTextMaxLine{ 
-		font-size:1.5rem; 
+		.sapMTextLineClamp.sapMTextMaxLine{
+		font-size:1.3rem; 
+		}
+		.sapMObjectNumberText{
+		font-size:1rem !important;
 		}
 	</html:style>
 	<Page showHeader="true" title="Material Document" showFooter="true" showNavButton="false" navButtonPress="" navButtonType="Transparent">
