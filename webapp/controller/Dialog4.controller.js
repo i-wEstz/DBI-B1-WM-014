@@ -16,15 +16,21 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		_onButtonPress: function(oEvent) {
 
-			var oBindingContext = oEvent.getSource().getBindingContext();
+			// var oBindingContext = oEvent.getSource().getBindingContext();
+
+			// return new Promise(function(fnResolve) {
+
+			// 	this.doNavigate("GenByMatNo", oBindingContext, fnResolve, "");
+			// }.bind(this)).catch(function(err) {
+			// 	if (err !== undefined) {
+			// 		MessageBox.error(err.message);
+			// 	}
+			// });
+				var oDialog = this.getView().getContent()[0];
 
 			return new Promise(function(fnResolve) {
-
-				this.doNavigate("GenByMatNo", oBindingContext, fnResolve, "");
-			}.bind(this)).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err.message);
-				}
+				oDialog.attachEventOnce("afterClose", null, fnResolve);
+				oDialog.close();
 			});
 
 		},

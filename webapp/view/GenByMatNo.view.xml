@@ -11,7 +11,7 @@
                                     <Label text="Material No" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
                                 </form:label>
                                 <form:fields>
-                                    <Input placeholder="input material number" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0" valueHelpRequest="_onInputValueHelpRequest"/>
+                                    <Input placeholder="input material number" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" change="onInputChange" valueHelpOnly="false" maxLength="0" valueHelpRequest="_onInputValueHelpRequest"/>
                                 </form:fields>
                             </form:FormElement>
                         </form:formElements>
@@ -22,14 +22,33 @@
                     <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
                 </form:layout>
             </form:Form>
-            <ObjectHeader intro="Material No." title="Material Desc" icon="sap-icon://product" number="" numberUnit="" numberState="None" showMarkers="false" markFavorite="false" markFlagged="false" backgroundDesign="Transparent" condensed="false">
+             <ObjectHeader id="ObjHeader" title="{/Maktx}" icon="sap-icon://product" number="{/Matnr}" numberUnit="" numberState="None" showMarkers="false" markFavorite="false" markFlagged="false" backgroundDesign="Transparent" condensed="true">
                 <attributes/>
                 <statuses/>
             </ObjectHeader>
-            <VBox alignItems="Center" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">
+             <VBox alignItems="Center" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">
                 <items>
-                    <Text text="Print Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-                    <StepInput value="0" min="0" max="10" step="1" largerStep="2" displayValuePrecision="0" width="auto" valueState="None" editable="true" enabled="true"/>
+                    <form:Form width="100%" editable="true" visible="true">
+                        <form:title/>
+                        <form:formContainers>
+                            <form:FormContainer visible="true">
+                                <form:formElements>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Print Quantity" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+                                        </form:label>
+                                        <form:fields>
+                                             <StepInput value="0" min="0" max="10" step="1" largerStep="2" displayValuePrecision="0" width="auto" valueState="None" editable="true" enabled="true"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                                <form:title/>
+                            </form:FormContainer>
+                        </form:formContainers>
+                        <form:layout>
+                            <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                        </form:layout>
+                    </form:Form>
                 </items>
                 <layoutData/>
             </VBox>

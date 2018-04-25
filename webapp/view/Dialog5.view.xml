@@ -14,30 +14,6 @@
                                     <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
                                 </form:fields>
                             </form:FormElement>
-                            <form:FormElement visible="true">
-                                <form:label>
-                                    <Label text="Material Description" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-                                </form:label>
-                                <form:fields>
-                                    <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement visible="true">
-                                <form:label>
-                                    <Label text="Storage Location" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-                                </form:label>
-                                <form:fields>
-                                    <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
-                                </form:fields>
-                            </form:FormElement>
-                            <form:FormElement visible="true">
-                                <form:label>
-                                    <Label text="Plant" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
-                                </form:label>
-                                <form:fields>
-                                    <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
-                                </form:fields>
-                            </form:FormElement>
                         </form:formElements>
                         <form:title/>
                     </form:FormContainer>
@@ -46,6 +22,70 @@
                     <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
                 </form:layout>
             </form:Form>
+            <Panel height="auto" width="100%" headerText="More Search" expandable="true" expanded="false" expandAnimation="true" backgroundDesign="Solid">
+                <content>
+                    <form:Form width="100%" editable="true" visible="true">
+                        <form:title/>
+                        <form:formContainers>
+                            <form:FormContainer visible="true">
+                                <form:formElements>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Material Description" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                                <form:title/>
+                            </form:FormContainer>
+                            <form:FormContainer visible="true">
+                                <form:formElements>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Storage Location" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                                <form:title/>
+                            </form:FormContainer>
+                            <form:FormContainer visible="true">
+                                <form:formElements>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Plant" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                                <form:title/>
+                            </form:FormContainer>
+                            <form:FormContainer visible="true">
+                                <form:formElements>
+                                    <form:FormElement visible="true">
+                                        <form:label>
+                                            <Label text="Batch" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit"/>
+                                        </form:label>
+                                        <form:fields>
+                                            <Input type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+                                        </form:fields>
+                                    </form:FormElement>
+                                </form:formElements>
+                                <form:title/>
+                            </form:FormContainer>
+                        </form:formContainers>
+                        <form:layout>
+                            <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                        </form:layout>
+                    </form:Form>
+                </content>
+            </Panel>
             <Table width="100%" noDataText="No data" mode="SingleSelectLeft" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
                 <infoToolbar>
                     <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
@@ -62,15 +102,21 @@
                         </header>
                         <footer/>
                     </Column>
+                    <!--<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">-->
+                    <!--    <header>-->
+                    <!--        <Text text="SLOC" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>-->
+                    <!--    </header>-->
+                    <!--    <footer/>-->
+                    <!--</Column>-->
+                    <!--<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">-->
+                    <!--    <header>-->
+                    <!--        <Text text="Plant" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>-->
+                    <!--    </header>-->
+                    <!--    <footer/>-->
+                    <!--</Column>-->
                     <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                         <header>
-                            <Text text="SLOC" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-                        </header>
-                        <footer/>
-                    </Column>
-                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                        <header>
-                            <Text text="Plant" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+                            <Text text="Batch" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
                         </header>
                         <footer/>
                     </Column>
@@ -79,8 +125,9 @@
                     <ColumnListItem type="Active">
                         <cells>
                             <ObjectIdentifier title="ID" text="MatDesc" titleActive="false" visible="true"/>
-                            <Text text="SLOC" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-                            <Text text="Plant" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+                            <!--<Text text="SLOC" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>-->
+                            <!--<Text text="Plant" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>-->
+                            <Text text="Batch" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
                         </cells>
                     </ColumnListItem>
                 </items>
@@ -88,8 +135,8 @@
         </content>
         <beginButton/>
         <buttons>
-            <Button text="OK" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onOk"  />
-            <Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onCancle" />
+            <Button text="OK" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+            <Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
         </buttons>
         <customHeader/>
         <endButton/>

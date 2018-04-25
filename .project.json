@@ -1,5 +1,11 @@
 {
   "dataBinding": {
+  	"/webapp/view/Dialog5.view.xml": {
+      "entitySet": ""
+    },
+  	"/webapp/view/Dialog4.view.xml": {
+      "entitySet": ""
+    },
     "/webapp/view/Dialog3.view.xml": {
       "entitySet": ""
     },

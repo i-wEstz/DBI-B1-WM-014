@@ -23,6 +23,30 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 
 		},
+		onInputChange: function(evt) {
+
+			var a = this.getView().byId("ObjHeader");
+			var url = this.getView().getModel().sServiceUrl;
+			var oModel = new sap.ui.model.odata.ODataModel(url, true);
+			var oJsonModel = new sap.ui.model.json.JSONModel();
+			var value = evt.getSource().getValue();
+			oModel.read("/MaterialInfoSet(Matnr='" + value + "',Charg='')", null, null, true, function(oData, repsonse) {
+				var oObjH = this.getView().byId("ObjHeader");
+				oObjH.setBackgroundDesign("Translucent");
+				if (oData.Maktx == 'NOTFOUND') {
+					oData.Matnr = oData.Matnr;
+					oData.Maktx = "Material Number not found.";
+					oObjH.setNumberState("Error");
+				} else {
+					oObjH.setNumberState("Success");
+				}
+				oJsonModel.setData(oData);
+				oObjH.setModel(oJsonModel);
+				// oObjH.bindElement(oJsonModel);
+			}.bind(this));
+			// sap.ui.getCore().setModel(oJsonModel);
+
+		},
 		_onPageNavButtonPress: function() {
 
 			var oHistory = History.getInstance();
@@ -150,6 +174,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		onInit: function() {
 			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.oRouter.getTarget("GenByMatNo").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
+			// var oObjH = this.getView().byId("ObjHeader");
+			// oObjH.setNumberState("None");
+			// oObjH.setTitle("Material Not Found");
 
 		}
 	});
