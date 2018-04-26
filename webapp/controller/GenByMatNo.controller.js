@@ -1,8 +1,9 @@
 sap.ui.define(["sap/ui/core/mvc/Controller",
 	"sap/m/MessageBox",
 	"./utilities",
+	"./JsBarcode",
 	"sap/ui/core/routing/History"
-], function(BaseController, MessageBox, Utilities, History) {
+], function(BaseController, MessageBox, Utilities, Barcode, History) {
 	"use strict";
 
 	return BaseController.extend("com.sap.build.standard.dbiB1Wm014GenQrBarcode.controller.GenByMatNo", {
@@ -23,25 +24,73 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 
 		},
+		address: "",
+		zebraPrint: function(address, value, qty) {
+			var base64 = new Array();
+			for(var i=0;i<qty;i++){
+			base64.push(value);
+			}
+			window.cordova.plugins.zbtprinter.printImage(base64, address,
+				function(success) {
+					sap.m.MessageToast.show("Printing Inprocess...");
+				},
+				function(fail) {
+					sap.m.MessageToast.show(fail);
+				}
+			);
+		},
+		zebraConnect: function() {
+
+			var defer = $.Deferred();
+			window.cordova.plugins.zbtprinter.discoverPrinters(
+				function(MACAddress) {
+					var addr = MACAddress;
+					// that.zebraPrint(address,this.val);
+					// this.address = MACAddress;
+					defer.resolve(addr);
+				}.bind(this),
+				function(fail) {
+					sap.m.MessageToast.show(fail);
+					defer.reject();
+				}.bind(this)
+			);
+
+			return defer;
+
+		},
 		onInputChange: function(evt) {
 
-			var a = this.getView().byId("ObjHeader");
 			var url = this.getView().getModel().sServiceUrl;
 			var oModel = new sap.ui.model.odata.ODataModel(url, true);
 			var oJsonModel = new sap.ui.model.json.JSONModel();
 			var value = evt.getSource().getValue();
 			oModel.read("/MaterialInfoSet(Matnr='" + value + "',Charg='')", null, null, true, function(oData, repsonse) {
 				var oObjH = this.getView().byId("ObjHeader");
+				var notfound = false;
 				oObjH.setBackgroundDesign("Translucent");
 				if (oData.Maktx == 'NOTFOUND') {
 					oData.Matnr = oData.Matnr;
 					oData.Maktx = "Material Number not found.";
+					notfound = true;
 					oObjH.setNumberState("Error");
 				} else {
 					oObjH.setNumberState("Success");
 				}
 				oJsonModel.setData(oData);
 				oObjH.setModel(oJsonModel);
+				//Set BarCode Image
+				if (!notfound) {
+					var url = this.getView().getModel().sServiceUrl;
+					var img = url + "/IdentityLabelSet(MaterialNumber='" + oData.Matnr + "',BatchNumber='')/$value";
+					var oImg = this.getView().byId("img");
+					oImg.setSrc(img);
+
+				} else {
+
+					var oImg = this.getView().byId("img");
+					oImg.setSrc("");
+				}
+
 				// oObjH.bindElement(oJsonModel);
 			}.bind(this));
 			// sap.ui.getCore().setModel(oJsonModel);
@@ -139,6 +188,73 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					oView.getController().setRouter(this.oRouter);
 					oDialog = oView.getContent()[0];
 					this.mDialogs[sDialogName] = oDialog;
+					oDialog.getParent().getController().addCallBack(function(fnCallBack) {
+						if (fnCallBack == "OK") {
+							//do print
+							var matno = this.getView().byId("matno").getValue();
+							var qty = this.getView().byId("prtqty").getValue();
+							if (this.getView().byId("ObjHeader").getNumberState() == 'Error') {
+								sap.m.MessageToast.show("Material not Found");
+							} else {
+								// alert("OK");
+								// var c = document.createElement('canvas');
+								// var imgId = this.getView().byId('img');
+								// var img = document.getElementById(imgId.sId);
+								// c.height = img.naturalHeight/2;
+								// c.width = img.naturalWidth/2;
+								// var ctx = c.getContext('2d');
+
+								// ctx.drawImage(img, 0, 0, c.width, c.height, 0, 0, c.width, c.height);
+								// var base64String = c.toDataURL("image/png");
+								// var xstring = base64String.replace(/^data:image\/(png|jpg);base64,/, "");
+
+								// // this.zebraPrint(base64String);
+								// if(this.address == ""){
+								// var defer = this.zebraConnect();
+								// $.when.apply( $, [defer] ).done(function(arg){
+								// 	this.zebraPrint(arg,xstring);
+								// 	this.address = arg;
+								// }.bind(this)).fail(function(arg){
+
+								// });
+
+								// }
+								// else{
+								// 	this.zebraPrint(this.address,xstring);
+								// }
+								// // if (address) {
+								// // 	this.zebraPrint(address, xstring);
+								// // }
+								var canvas = document.createElement("canvas");
+								JsBarcode(canvas, matno, {
+									format: "CODE39"
+								});
+								var dataURL = canvas.toDataURL("image/png");
+								var xstring = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+								if (this.address == "") {
+									var defer = this.zebraConnect();
+									$.when.apply($, [defer]).done(function(arg) {
+										this.zebraPrint(arg, xstring, qty);
+										this.address = arg;
+									}.bind(this)).fail(function(arg) {
+
+									});
+
+								} else {
+									this.zebraPrint(this.address, xstring, qty);
+								}
+							}
+
+							// var url = this.getView().getModel().sServiceUrl;
+							// var img = url + "/IdentityLabelSet(MaterialNumber='" + matno + "',BatchNumber='')/$value";
+							// var oImg = this.getView().byId("img");
+							// oImg.setSrc(img);
+							// debugger;
+
+						} else {
+							//dont print
+						}
+					}.bind(this));
 				}.bind(this));
 			}
 

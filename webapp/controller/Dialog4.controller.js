@@ -10,6 +10,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.oRouter = oRouter;
 
 		},
+		fnCallBack: null,
+
+		addCallBack: function(fn) {
+			this.fnCallBack = fn;
+		},
 		getBindingParameters: function() {
 			return {};
 
@@ -26,12 +31,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			// 		MessageBox.error(err.message);
 			// 	}
 			// });
-				var oDialog = this.getView().getContent()[0];
+			var oDialog = this.getView().getContent()[0];
 
 			return new Promise(function(fnResolve) {
 				oDialog.attachEventOnce("afterClose", null, fnResolve);
 				oDialog.close();
-			});
+				this.fnCallBack("OK");
+			}.bind(this));
 
 		},
 		doNavigate: function(sRouteName, oBindingContext, fnPromiseResolve, sViaRelation) {
@@ -50,7 +56,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var sMasterContext = this.sMasterContext ? this.sMasterContext : sPath;
 
 			if (sEntityNameSet !== null) {
-				sNavigationPropertyName = sViaRelation || this.getOwnerComponent().getNavigationPropertyForNavigationWithContext(sEntityNameSet, sRouteName);
+				sNavigationPropertyName = sViaRelation || this.getOwnerComponent().getNavigationPropertyForNavigationWithContext(sEntityNameSet,
+					sRouteName);
 			}
 			if (sNavigationPropertyName !== null && sNavigationPropertyName !== undefined) {
 				if (sNavigationPropertyName === "") {
@@ -94,6 +101,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			return new Promise(function(fnResolve) {
 				oDialog.attachEventOnce("afterClose", null, fnResolve);
 				oDialog.close();
+				this.fnCallBack("Cancel");
 			});
 
 		},
